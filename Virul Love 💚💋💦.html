@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        video {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        #play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        #video-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <video id="background-video" autoplay loop>
+            <source src="https://litter.catbox.moe/ac3plh.mp4" type="video/mp4">
+            <!-- Add more video sources for different formats if needed -->
+        </video>
+    </div>
+
+    <div id="play-button">&#9658;</div>
+
+    <div id="video-controls">
+        <button id="pause-button">Pause</button>
+        <!-- Add more video control buttons here (e.g., volume control, fullscreen, etc.) -->
+    </div>
+
+    <script>
+        const playButton = document.getElementById("play-button");
+        const backgroundVideo = document.getElementById("background-video");
+        const pauseButton = document.getElementById("pause-button");
+
+        playButton.addEventListener("click", () => {
+            backgroundVideo.style.zIndex = 0; // Send video to the background
+            playButton.style.display = "none"; // Hide play button
+            backgroundVideo.play(); // Start playing the video
+            pauseButton.style.display = "block"; // Show pause button
+        });
+
+        pauseButton.addEventListener("click", () => {
+            backgroundVideo.pause(); // Pause the video
+            pauseButton.style.display = "none"; // Hide pause button
+            playButton.style.display = "block"; // Show play button
+        });
+    </script>
+</body>
+</html>
